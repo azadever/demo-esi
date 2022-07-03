@@ -80,16 +80,16 @@ const ModalStyled = styled(Modal)`
 
 const types = [
   {
-    label: "INDIVIDUAL OFFSET",
+    label: "CARBON OFFSET BUYER",
     desc: "Offset the emissions of your daily activities for one month.",
-    price: 12,
     image: "/person.svg",
+    button: "RM 12 | Buy Now",
   },
   {
-    label: "BUSINESS OFFSET",
-    desc: "Offset the emissions of your business activities for one month.",
-    price: 12,
+    label: "CARBON OFFSET PROVIDER",
+    desc: "Let's register with us and become our carbon offset provider.",
     image: "/company.svg",
+    button: "Register Now",
   },
 ];
 
@@ -131,8 +131,7 @@ const Home: NextPage = () => {
                     }
                   }}
                 >
-                  {" "}
-                  RM {`${type.price}`} | Buy Now
+                  {type.button}
                 </Button>
               </div>
             );

@@ -1,9 +1,11 @@
 import type { NextPage } from "next";
 import styled from "@emotion/styled";
+import { useRouter } from "next/router";
 
 import { Layout, Menu, Breadcrumb, Tabs, Card, Row, Col } from "antd";
+import Text from "antd/lib/typography/Text";
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content, Footer, Sider } = Layout;
 
 const LayoutStyled = styled(Layout)`
   height: 100vh;
@@ -25,6 +27,9 @@ const LayoutStyled = styled(Layout)`
     float: right;
     margin: 16px 0 16px 24px;
   }
+
+  .ant-layout-header {
+  }
 `;
 
 interface LayoutProps {
@@ -32,22 +37,33 @@ interface LayoutProps {
 }
 
 const MainLayout = ({ children }: LayoutProps): JSX.Element => {
+  const router = useRouter();
+
   return (
-    <LayoutStyled className="layout">
-      <Header>
-        <div className="logo" />
-        <Menu theme="dark" mode="horizontal">
-          <Menu.Item>Dashboard</Menu.Item>
+    <Layout>
+      <Sider>
+        <div>
+          <div className="logo">
+            <img src="logo.png" style={{ width: 25, margin: 16 }} />
+          </div>
+        </div>
+        <Menu theme="dark">
+          <Menu.Item onClick={() => router.push("/admin")}>Dashboard</Menu.Item>
           <Menu.Item>Settings</Menu.Item>
+          <Menu.Item onClick={() => router.push("/our-project")}>
+            Projects
+          </Menu.Item>
         </Menu>
-      </Header>
-      <Content style={{ padding: "24px" }}>
-        <div className="site-layout-content">{children}</div>
-      </Content>
-      <Footer style={{ textAlign: "center" }}>
-        Ever AI Technologies ©2020 Created by Azad Suhail
-      </Footer>
-    </LayoutStyled>
+      </Sider>
+      <LayoutStyled className="layout">
+        <Content style={{ padding: "24px" }}>
+          <div className="site-layout-content">{children}</div>
+        </Content>
+        <Footer style={{ textAlign: "center" }}>
+          Ever AI Technologies ©2020 Created by Azad Suhail
+        </Footer>
+      </LayoutStyled>
+    </Layout>
   );
 };
 
